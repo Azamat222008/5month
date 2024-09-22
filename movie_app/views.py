@@ -54,3 +54,23 @@ def review_detail_view(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     review_data = ReviewSerializer(review, many=False).data
     return Response(data=review_data)
+
+
+
+@api_view(['GET'])
+def get_review_texts(request, movie_id):
+    # Получаем отзывы для конкретного фильма по его ID
+    reviews = Review.objects.filter(movie_id=movie_id)
+
+    # Проверяем, есть ли отзывы для данного фильма
+    if not reviews.exists():
+        return Response({'error': 'Отзывы не найдены для указанного фильма'}, status=404)
+
+    # Сериализуем отзывы
+    serializer = ReviewSerializer(reviews, many=True)
+
+    # Извлекаем текст отзывов из сериализованных данных
+    review_texts = [review['text'] for review in serializer.data]
+
+    # Возвращаем текст отзывов в формате JSON
+    return Response(review_texts)
