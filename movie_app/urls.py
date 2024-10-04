@@ -4,10 +4,11 @@ from movie_app import views
 
 
 urlpatterns = [
-    path('', views.movie_list_view),
-    path('', views.director_list_view),
-    path('', views.review_list_view),
-    path('<int:id>/', views.movie_detail_view),
-    path('<int:id>/', views.director_detail_view),
-    path('<int:id>/', views.review_detail_view),
+    path('movies/', views.MovieListAPIView.as_view()),
+    path('directors/', views.DirectorListAPIView.as_view()),
+    path('reviews/', views.ReviewListAPIView.as_view()),
+    path('movies/<int:id>/', views.MovieDetailListAPIView.as_view()),
+    path('directors/<int:id>/', views.DirectorDetailListAPIView.as_view()),
+    path('reviews/<int:id>/', views.ReviewDetailListAPIView.as_view()),
+
 ]

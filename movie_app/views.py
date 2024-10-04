@@ -4,6 +4,44 @@ from .models import Director,Movie,Review
 from .serializers import DirectorSerializer,MovieSerializer,ReviewSerializer,DirectorValidateSerializer,MovieValidateSerializer,ReviewValidateSerializer
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
+
+
+
+class MovieListAPIView(ListCreateAPIView):
+    serializer_class = MovieSerializer
+    queryset = Movie.objects.all()
+
+
+class DirectorListAPIView(ListCreateAPIView):
+    serializer_class = DirectorSerializer
+    queryset = Director.objects.all()
+
+
+class ReviewListAPIView(ListCreateAPIView):
+    serializer_class = ReviewSerializer
+    queryset = Review.objects.all()
+
+
+class MovieDetailListAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = MovieSerializer
+    queryset = Movie.objects.all()
+    lookup_field = 'id'
+
+
+
+class DirectorDetailListAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = DirectorSerializer
+    queryset = Director.objects.all()
+    lookup_field = 'id'
+
+class ReviewDetailListAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = ReviewSerializer
+    queryset = Review.objects.all()
+    lookup_field = 'id'
+
+
+
 
 
 
